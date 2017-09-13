@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">小黑屋</string>
+    <string name="auto_reply_description">小黑屋正常运行需要授予该权限</string>
+    <string name="title_activity_naughty_pick">选择需要冻结的应用</string>
+    <string name="action_settings">设置</string>
+    <string name="action_edit">编辑</string>
+    <string name="action_about">关于</string>
+    <string name="title_activity_about">关于</string>
+    <string name="url_official_website">https://github.com/EAGzzyCSL/DarkRoom</string>
+</resources>
