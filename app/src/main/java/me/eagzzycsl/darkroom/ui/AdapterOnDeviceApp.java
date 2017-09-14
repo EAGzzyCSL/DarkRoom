@@ -8,10 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import me.eagzzycsl.darkroom.R;
-import me.eagzzycsl.darkroom.model.UserApp;
+import me.eagzzycsl.darkroom.model.OnDeviceApp;
 
-class AdapterUserApp extends BaseAdapter<UserApp> {
-    AdapterUserApp(Context context) {
+class AdapterOnDeviceApp extends BaseAdapter<OnDeviceApp> {
+    AdapterOnDeviceApp(Context context) {
         super(context);
     }
 
@@ -25,7 +25,7 @@ class AdapterUserApp extends BaseAdapter<UserApp> {
         return new UserHolder(LayoutInflater.from(context).inflate(getLayoutId(), parent, false));
     }
 
-    private class UserHolder extends RecViewHolder<UserApp> implements View.OnClickListener {
+    private class UserHolder extends RecViewHolder<OnDeviceApp> implements View.OnClickListener {
         private final TextView item_name;
         private final ImageView item_icon;
 
@@ -39,22 +39,22 @@ class AdapterUserApp extends BaseAdapter<UserApp> {
         }
 
         @Override
-        public void setContent(UserApp userApp) {
-            item_name.setText(userApp.getAppName());
-            item_icon.setImageDrawable(userApp.getAppIcon());
-            if (userApp.getFrozen()) {
+        public void setContent(OnDeviceApp onDeviceApp) {
+            item_name.setText(onDeviceApp.getAppName());
+            item_icon.setImageDrawable(onDeviceApp.getAppIcon());
+            if (onDeviceApp.getFrozen()) {
                 item_name.setTextColor(context.getColor(R.color.colorPrimary));
             } else {
                 item_name.setTextColor(context.getColor(android.R.color.black));
             }
-            itemView.setTag(userApp);
+            itemView.setTag(onDeviceApp);
         }
 
         @Override
         public void onClick(View view) {
-            UserApp userApp = (UserApp) view.getTag();
-            userApp.toggleFrozen();
-            AdapterUserApp.this.notifyItemChanged(this.getAdapterPosition());
+            OnDeviceApp onDeviceApp = (OnDeviceApp) view.getTag();
+            onDeviceApp.toggleFrozen();
+            AdapterOnDeviceApp.this.notifyItemChanged(this.getLayoutPosition());
         }
     }
 

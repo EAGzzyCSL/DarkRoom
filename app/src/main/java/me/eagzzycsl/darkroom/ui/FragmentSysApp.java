@@ -6,10 +6,10 @@ import me.eagzzycsl.darkroom.access.AppList;
 import me.eagzzycsl.darkroom.model.OnDeviceApp;
 
 
-public class FragmentUserApp extends FragmentOnDeviceApp<OnDeviceApp> {
+public class FragmentSysApp extends FragmentOnDeviceApp<OnDeviceApp> {
     @Override
     public ArrayList<OnDeviceApp> getOnDeviceApps() {
-        return AppList.getUserApps();
+        return AppList.getSysApps();
     }
 
 }

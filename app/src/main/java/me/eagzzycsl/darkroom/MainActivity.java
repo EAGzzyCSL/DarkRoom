@@ -6,7 +6,6 @@ import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +17,7 @@ import me.eagzzycsl.darkroom.access.FreezeTask;
 import me.eagzzycsl.darkroom.model.NaughtyApp;
 import me.eagzzycsl.darkroom.ui.ActivityToolbar;
 import me.eagzzycsl.darkroom.ui.FragmentNaughty;
+import me.eagzzycsl.darkroom.uitls.MyConfig;
 import me.eagzzycsl.darkroom.uitls.MyLogger;
 
 public class MainActivity extends ActivityToolbar implements View.OnClickListener {
@@ -42,7 +42,7 @@ public class MainActivity extends ActivityToolbar implements View.OnClickListene
 
     private void myFind() {
         fab_add = (FloatingActionButton) findViewById(R.id.fab_add);
-        naughtyFragment = (FragmentNaughty) getFragmentManager().findFragmentById(R.id.fragment_naughty);
+        naughtyFragment = (FragmentNaughty) getSupportFragmentManager().findFragmentById(R.id.fragment_naughty);
 
     }
 
@@ -56,7 +56,9 @@ public class MainActivity extends ActivityToolbar implements View.OnClickListene
 
     private void mySet() {
         fab_add.setOnClickListener(this);
-        requireAccessibility();
+        if(!MyConfig.DEBUG || MyConfig.NO_CHECK_ACCESS){
+            requireAccessibility();
+        }
     }
 
     private void requireAccessibility() {

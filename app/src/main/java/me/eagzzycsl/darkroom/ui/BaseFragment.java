@@ -1,8 +1,8 @@
 package me.eagzzycsl.darkroom.ui;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,7 +37,7 @@ public abstract class BaseFragment<M extends MyApp> extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_rec_fragment, container);
+        View view = inflater.inflate(R.layout.layout_rec_fragment, container,false);
         recyclerView = view.findViewById(R.id.fragment_recyclerView);
         return view;
     }

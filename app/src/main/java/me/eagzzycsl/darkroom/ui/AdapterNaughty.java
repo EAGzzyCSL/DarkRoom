@@ -31,14 +31,14 @@ class AdapterNaughty extends BaseAdapter<NaughtyApp> {
 
         NaughtyHolder(View itemView) {
             super(itemView);
-            item_name =itemView.findViewById(R.id.item_name);
-            item_icon =itemView.findViewById(R.id.item_icon);
+            item_name = itemView.findViewById(R.id.item_name);
+            item_icon = itemView.findViewById(R.id.item_icon);
             itemView.setOnClickListener(view -> {
-                NaughtyApp naughtyApp = (NaughtyApp)itemView.getTag();
+                NaughtyApp naughtyApp = (NaughtyApp) itemView.getTag();
                 naughtyApp.launch(context);
             });
             itemView.setOnLongClickListener(view -> {
-                NaughtyApp naughtyApp = (NaughtyApp)itemView.getTag();
+                NaughtyApp naughtyApp = (NaughtyApp) itemView.getTag();
                 naughtyApp.goToSettings(context);
                 return true;
             });

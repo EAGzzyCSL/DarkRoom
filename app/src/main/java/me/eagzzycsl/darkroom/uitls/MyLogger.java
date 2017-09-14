@@ -3,6 +3,7 @@ package me.eagzzycsl.darkroom.uitls;
 import android.util.Log;
 
 public enum MyLogger {
+
     accessibility("无障碍服务"),
     exception("异常"),
     freeze("冻结任务");
@@ -27,10 +28,14 @@ public enum MyLogger {
     }
 
     public void i(Object object) {
-        this.i(this.stringify(object));
+        if (MyConfig.DEBUG) {
+            this.i(this.stringify(object));
+        }
     }
 
     public void i(String tag, Object object) {
-        this.i(tag + "@: " + this.stringify(object));
+        if (MyConfig.DEBUG) {
+            this.i(tag + "@: " + this.stringify(object));
+        }
     }
 }

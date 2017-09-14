@@ -1,9 +1,9 @@
 package me.eagzzycsl.darkroom.model;
 
 
-public class UserApp extends MyApp {
+public class OnDeviceApp extends MyApp {
 
-    public UserApp(MetaApp metaApp) {
+    public OnDeviceApp(MetaApp metaApp) {
         super(metaApp);
     }
 

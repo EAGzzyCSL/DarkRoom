@@ -2,7 +2,6 @@ package me.eagzzycsl.darkroom.access;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import java.util.ArrayList;
@@ -12,16 +11,17 @@ import java.util.List;
 import me.eagzzycsl.darkroom.db.SQLMan;
 import me.eagzzycsl.darkroom.model.MetaApp;
 import me.eagzzycsl.darkroom.model.NaughtyApp;
-import me.eagzzycsl.darkroom.model.UserApp;
+import me.eagzzycsl.darkroom.model.OnDeviceApp;
 
 
 public final class AppList {
     private final static ArrayList<NaughtyApp> naughtyApps = new ArrayList<>();
-    private final static ArrayList<UserApp> userApps = new ArrayList<>();
+    private final static ArrayList<OnDeviceApp> sysApps = new ArrayList<>();
+    private final static ArrayList<OnDeviceApp> userApps = new ArrayList<>();
     private final static HashMap<String, MetaApp> apps = new HashMap<>();
 
     public static void init(Context context) {
-        getAllUserApp(context);
+        getOnDeviceApp(context);
         naughtyApps.clear();
         naughtyApps.addAll(SQLMan.getInstance(context).readAll());
 
@@ -42,7 +42,11 @@ public final class AppList {
     }
 
 
-    public static ArrayList<UserApp> getUserApps() {
+    public static ArrayList<OnDeviceApp> getSysApps() {
+        return sysApps;
+    }
+
+    public static ArrayList<OnDeviceApp> getUserApps() {
         return userApps;
     }
 
@@ -58,31 +62,45 @@ public final class AppList {
         naughtyApps.add(naughtyApp);
     }
 
-    public static boolean useAppInNaughty(UserApp userApp) {
+    public static boolean appInNaughty(OnDeviceApp onDeviceApp) {
         return naughtyApps.stream().anyMatch(naughtyApp ->
-                naughtyApp.getMetaApp() == userApp.getMetaApp()
+                naughtyApp.getMetaApp() == onDeviceApp.getMetaApp()
         );
     }
 
-    public static ArrayList<UserApp> getAllUserApp(Context context) {
+    public static void getOnDeviceApp(Context context) {
         userApps.clear();
+        sysApps.clear();
         PackageManager pm = context.getPackageManager();
-        List<PackageInfo> packages = pm.getInstalledPackages(0);
-        // 判断系统/非系统应用
-        packages.stream()
-                .filter(packageInfo -> (
-                        packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0
-                ).
-                forEach(packageInfo -> {
-                    String pkgName = packageInfo.packageName;
-                    MetaApp metaApp = AppList.getMetaApp(pkgName) == null ? new MetaApp(
-                            packageInfo.applicationInfo.loadLabel(pm).toString(),
-                            packageInfo.packageName,
-                            packageInfo.applicationInfo.loadIcon(pm)
-                    ) : AppList.getMetaApp(pkgName);
-                    AppList.addMetaApp(metaApp);
-                    userApps.add(new UserApp(metaApp));
-                });
-        return userApps;
+        List<ApplicationInfo> apps = pm.getInstalledApplications(0);
+        for (ApplicationInfo app : apps) {
+            // updated system app
+            if ((app.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+                //system app
+            } else if ((app.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                addToList(sysApps, app, pm);
+                // user-installed app
+            } else {
+                addToList(userApps, app, pm);
+
+            }
+        }
     }
+
+    public static void addToList(
+            ArrayList<OnDeviceApp> apps,
+            ApplicationInfo app,
+            PackageManager pm
+    ) {
+        String pkgName = app.packageName;
+
+        MetaApp metaApp = AppList.getMetaApp(pkgName) == null ? new MetaApp(
+                app.loadLabel(pm).toString(),
+                pkgName,
+                app.loadIcon(pm)
+        ) : AppList.getMetaApp(pkgName);
+        AppList.addMetaApp(metaApp);
+        apps.add(new OnDeviceApp(metaApp));
+    }
+
 }
