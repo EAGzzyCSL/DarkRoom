@@ -34,6 +34,10 @@ public class FreezeTask {
     }
 
     public void exec(Context context) {
+        if (tasks.size() == 0) {
+            Toast.makeText(context, "没有应用需要冻结", Toast.LENGTH_SHORT).show();
+            return;
+        }
         AsyncTask<String, Integer, Integer> task = new AsyncTask<String, Integer, Integer>() {
 
             @Override
@@ -49,6 +53,7 @@ public class FreezeTask {
                 while (i < tasks.size()) {
                     if (SettingsStateMachineManager.getInstance().isReset()) {
                         MyLogger.freeze.i("循环中一次");
+                        // TODO：按名字判断是否是对应的settings
                         tasks.get(i).frozen(context);
                         publishProgress(i++);
                     }

@@ -60,7 +60,7 @@ public final class AppList {
 
     public static boolean useAppInNaughty(UserApp userApp) {
         return naughtyApps.stream().anyMatch(naughtyApp ->
-                naughtyApp.getMetaApp().equals(userApp.getMetaApp())
+                naughtyApp.getMetaApp() == userApp.getMetaApp()
         );
     }
 
@@ -74,12 +74,12 @@ public final class AppList {
                         packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0
                 ).
                 forEach(packageInfo -> {
-
-                    MetaApp metaApp = new MetaApp(
+                    String pkgName = packageInfo.packageName;
+                    MetaApp metaApp = AppList.getMetaApp(pkgName) == null ? new MetaApp(
                             packageInfo.applicationInfo.loadLabel(pm).toString(),
                             packageInfo.packageName,
                             packageInfo.applicationInfo.loadIcon(pm)
-                    );
+                    ) : AppList.getMetaApp(pkgName);
                     AppList.addMetaApp(metaApp);
                     userApps.add(new UserApp(metaApp));
                 });
