@@ -80,6 +80,16 @@ public class SettingsAccessibilityService extends AccessibilityService {
         return null;
     }
 
+    private AccessibilityNodeInfo findNode(AccessibilityEvent accessibilityEvent, String widget, String[] text) {
+        for (String s : text) {
+            AccessibilityNodeInfo nodeInfo = findNode(accessibilityEvent, widget, s);
+            if (nodeInfo != null) {
+                return nodeInfo;
+            }
+        }
+        return null;
+    }
+
     private boolean performDisableClick(AccessibilityEvent accessibilityEvent) {
         AccessibilityNodeInfo node = this.findNode(
                 accessibilityEvent,
