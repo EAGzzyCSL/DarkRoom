@@ -51,12 +51,14 @@ public class SettingsAccessibilityService extends AccessibilityService {
                 }
                 if (SettingsStateMachineManager.getInstance().readyToNext()) {
                     MyLogger.accessibility.i("一个冻结完成");
+                    performBack();
                     SettingsStateMachineManager.getInstance().resetDisable();
                 }
             }
             if (SettingsStateMachineManager.getInstance().isWorkingInEnable()) {
                 if (SettingsStateMachineManager.getInstance().readyToEnable()) {
                     this.performEnableClick(accessibilityEvent);
+                    performBack();
                     SettingsStateMachineManager.getInstance().getCurrentWorkingApp().launch(getApplicationContext());
                 }
             }
@@ -119,6 +121,9 @@ public class SettingsAccessibilityService extends AccessibilityService {
         return node != null && node.performAction(AccessibilityNodeInfo.ACTION_CLICK);
     }
 
+    private boolean performBack() {
+        return performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK);
+    }
 
     @Override
     public void onInterrupt() {

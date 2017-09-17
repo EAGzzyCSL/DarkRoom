@@ -49,6 +49,11 @@ class AdapterNaughty extends BaseAdapter<NaughtyApp> {
             itemView.setTag(naughtyApp);
             item_name.setText(naughtyApp.getAppName());
             item_icon.setImageDrawable(naughtyApp.getAppIcon());
+            if (naughtyApp.getMetaApp().isEnable(context)) {
+                item_name.setTextColor(context.getColor(android.R.color.black));
+            } else {
+                item_name.setTextColor(context.getColor(R.color.colorAccent));
+            }
         }
     }
 }
