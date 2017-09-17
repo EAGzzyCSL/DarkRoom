@@ -10,4 +10,6 @@ public interface ConstantString {
     };
     String enable = "启用";
     String disable = "停用";
+
+    String pkgName = "pkgName";
 }

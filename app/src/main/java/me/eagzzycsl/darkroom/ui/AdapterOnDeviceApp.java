@@ -17,7 +17,7 @@ class AdapterOnDeviceApp extends BaseAdapter<OnDeviceApp> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.layout_item_info;
+        return R.layout.layout_item_on_device;
     }
 
     @Override

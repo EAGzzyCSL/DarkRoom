@@ -56,9 +56,10 @@ public class MainActivity extends ActivityToolbar implements View.OnClickListene
 
     private void mySet() {
         fab_add.setOnClickListener(this);
-        if(!MyConfig.DEBUG || MyConfig.NO_CHECK_ACCESS){
-            requireAccessibility();
+        if(MyConfig.DEBUG || MyConfig.NO_CHECK_ACCESS){
+            return;
         }
+        requireAccessibility();
     }
 
     private void requireAccessibility() {
