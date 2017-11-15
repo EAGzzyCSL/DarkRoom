@@ -6,11 +6,11 @@ import me.eagzzycsl.darkroom.uitls.MyLogger;
 
 public class SettingsStateMachineManager {
     private NaughtyApp currentWorkingApp = null;
-    private final MachineState state_init = new MachineState();
-    private final MachineState state_maybeNone = new MachineState();
-    private final MachineState state_showAppDetail = new MachineState();
-    private final MachineState state_showConfirm = new MachineState();
-    private final MachineState state_afterConfirm = new MachineState();
+    private final MachineState state_init = new MachineState("init");
+    private final MachineState state_maybeNone = new MachineState("maybeNone");
+    private final MachineState state_showAppDetail = new MachineState("showAppDetail");
+    private final MachineState state_showConfirm = new MachineState("showConfirm");
+    private final MachineState state_afterConfirm = new MachineState("afterConfirm");
     private MachineState currentState = state_init;
     private static SettingsStateMachineManager singleInstance = new SettingsStateMachineManager();
     private boolean inChange = false;

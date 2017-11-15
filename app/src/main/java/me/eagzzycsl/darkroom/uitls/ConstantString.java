@@ -9,7 +9,10 @@ public interface ConstantString {
             "停用应用",
     };
     String enable = "启用";
-    String disable = "停用";
+    String[] disable = {
+            "禁用",
+            "停用"
+    };
 
     String pkgName = "pkgName";
 }
