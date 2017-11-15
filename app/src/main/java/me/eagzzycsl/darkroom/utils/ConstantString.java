@@ -1,4 +1,4 @@
-package me.eagzzycsl.darkroom.uitls;
+package me.eagzzycsl.darkroom.utils;
 
 
 public interface ConstantString {

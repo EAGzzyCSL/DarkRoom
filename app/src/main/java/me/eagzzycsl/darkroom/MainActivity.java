@@ -17,8 +17,8 @@ import me.eagzzycsl.darkroom.access.FreezeTask;
 import me.eagzzycsl.darkroom.model.NaughtyApp;
 import me.eagzzycsl.darkroom.ui.ActivityToolbar;
 import me.eagzzycsl.darkroom.ui.FragmentNaughty;
-import me.eagzzycsl.darkroom.uitls.MyConfig;
-import me.eagzzycsl.darkroom.uitls.MyLogger;
+import me.eagzzycsl.darkroom.utils.MyConfig;
+import me.eagzzycsl.darkroom.utils.MyLogger;
 
 public class MainActivity extends ActivityToolbar implements View.OnClickListener {
     private ArrayList<NaughtyApp> naughtyApps;

@@ -12,8 +12,8 @@ import java.util.List;
 
 import me.eagzzycsl.darkroom.access.ActivityChange;
 import me.eagzzycsl.darkroom.access.SettingsStateMachineManager;
-import me.eagzzycsl.darkroom.uitls.ConstantString;
-import me.eagzzycsl.darkroom.uitls.MyLogger;
+import me.eagzzycsl.darkroom.utils.ConstantString;
+import me.eagzzycsl.darkroom.utils.MyLogger;
 
 
 public class SettingsAccessibilityService extends AccessibilityService {

@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import me.eagzzycsl.darkroom.access.AppList;
 import me.eagzzycsl.darkroom.model.NaughtyApp;
-import me.eagzzycsl.darkroom.uitls.ConstantString;
+import me.eagzzycsl.darkroom.utils.ConstantString;
 
 public class JumpActivity extends AppCompatActivity {
 

@@ -7,7 +7,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import me.eagzzycsl.darkroom.model.NaughtyApp;
-import me.eagzzycsl.darkroom.uitls.MyLogger;
+import me.eagzzycsl.darkroom.utils.MyLogger;
 
 
 public class FreezeTask {

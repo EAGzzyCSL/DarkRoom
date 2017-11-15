@@ -1,7 +1,7 @@
 package me.eagzzycsl.darkroom.access;
 
 import me.eagzzycsl.darkroom.model.NaughtyApp;
-import me.eagzzycsl.darkroom.uitls.MyLogger;
+import me.eagzzycsl.darkroom.utils.MyLogger;
 
 
 public class SettingsStateMachineManager {

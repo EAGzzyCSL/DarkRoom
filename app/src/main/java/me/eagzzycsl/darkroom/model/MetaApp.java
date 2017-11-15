@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.Settings;
 
-import me.eagzzycsl.darkroom.uitls.ConstantString;
+import me.eagzzycsl.darkroom.utils.ConstantString;
 
 import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
 

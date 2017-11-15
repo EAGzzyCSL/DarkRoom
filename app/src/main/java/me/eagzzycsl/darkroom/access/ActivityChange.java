@@ -1,6 +1,6 @@
 package me.eagzzycsl.darkroom.access;
 
-import me.eagzzycsl.darkroom.uitls.ConstantString;
+import me.eagzzycsl.darkroom.utils.ConstantString;
 
 public enum ActivityChange {
     // 注意初始状态字符串不要重复了

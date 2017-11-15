@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import me.eagzzycsl.darkroom.JumpActivity;
 import me.eagzzycsl.darkroom.access.SettingsStateMachineManager;
-import me.eagzzycsl.darkroom.uitls.ConstantString;
+import me.eagzzycsl.darkroom.utils.ConstantString;
 
 public class NaughtyApp extends MyApp {
 
