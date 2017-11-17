@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import me.eagzzycsl.darkroom.model.NaughtyApp;
 import me.eagzzycsl.darkroom.R;
+import me.eagzzycsl.darkroom.manager.AppManager;
+import me.eagzzycsl.darkroom.manager.ShortCutManager;
 
 class AdapterNaughty extends BaseAdapter<NaughtyApp> {
     AdapterNaughty(Context context) {
@@ -22,7 +24,7 @@ class AdapterNaughty extends BaseAdapter<NaughtyApp> {
 
     @Override
     public NaughtyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NaughtyHolder(LayoutInflater.from(context).inflate(getLayoutId(), parent, false));
+        return new NaughtyHolder(LayoutInflater.from(getContext()).inflate(getLayoutId(), parent, false));
     }
 
     private class NaughtyHolder extends RecViewHolder<NaughtyApp> {
@@ -37,16 +39,16 @@ class AdapterNaughty extends BaseAdapter<NaughtyApp> {
             item_add_shortcut = itemView.findViewById(R.id.item_add_shortcut);
             itemView.setOnClickListener(view -> {
                 NaughtyApp naughtyApp = (NaughtyApp) itemView.getTag();
-                naughtyApp.launch(context);
+                naughtyApp.launch(getContext());
             });
             itemView.setOnLongClickListener(view -> {
                 NaughtyApp naughtyApp = (NaughtyApp) itemView.getTag();
-                naughtyApp.goToSettings(context);
+                AppManager.INSTANCE.gotoSettings(getContext(), naughtyApp);
                 return true;
             });
             item_add_shortcut.setOnClickListener(view -> {
                 NaughtyApp naughtyApp = (NaughtyApp) itemView.getTag();
-                naughtyApp.createShortcut(context);
+                ShortCutManager.INSTANCE.createShortcut(getContext(),naughtyApp);
             });
         }
 
@@ -55,10 +57,10 @@ class AdapterNaughty extends BaseAdapter<NaughtyApp> {
             itemView.setTag(naughtyApp);
             item_name.setText(naughtyApp.getAppName());
             item_icon.setImageDrawable(naughtyApp.getAppIcon());
-            if (naughtyApp.getMetaApp().isEnable(context)) {
-                item_name.setTextColor(context.getColor(android.R.color.black));
+            if (naughtyApp.isEnable(getContext())) {
+                item_name.setTextColor(getContext().getColor(android.R.color.black));
             } else {
-                item_name.setTextColor(context.getColor(R.color.colorAccent));
+                item_name.setTextColor(getContext().getColor(R.color.colorAccent));
             }
         }
     }

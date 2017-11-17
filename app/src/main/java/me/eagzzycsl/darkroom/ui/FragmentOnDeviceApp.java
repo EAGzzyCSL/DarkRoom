@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-import me.eagzzycsl.darkroom.access.AppList;
+import me.eagzzycsl.darkroom.manager.AppList;
 import me.eagzzycsl.darkroom.db.SQLMan;
 import me.eagzzycsl.darkroom.model.MyApp;
 import me.eagzzycsl.darkroom.model.NaughtyApp;
@@ -27,7 +27,7 @@ public abstract class FragmentOnDeviceApp<O extends MyApp> extends BaseFragment<
     private void markFrozen() {
         onDeviceApps.forEach(onDeviceApp -> {
             (onDeviceApp).setFrozen(
-                    AppList.appInNaughty(onDeviceApp)
+                    AppList.INSTANCE.appInNaughty(onDeviceApp)
             );
         });
     }
@@ -37,8 +37,8 @@ public abstract class FragmentOnDeviceApp<O extends MyApp> extends BaseFragment<
         onDeviceApps.forEach(onDeviceApp -> {
             if (onDeviceApp.getFrozen()) {
                 final NaughtyApp naughtyApp = onDeviceApp.toNaughtyApp();
-                SQLMan.getInstance(getContext()).insert(naughtyApp);
-                AppList.addNaughtyApp(naughtyApp);
+                SQLMan.Companion.getInstance(getContext()).insert(naughtyApp);
+                AppList.INSTANCE.addNaughtyApp(naughtyApp);
             }
         });
     }

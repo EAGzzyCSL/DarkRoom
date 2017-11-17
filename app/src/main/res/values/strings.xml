@@ -7,6 +7,6 @@
     <string name="action_about">关于</string>
     <string name="title_activity_about">关于</string>
     <string name="url_official_website">https://github.com/EAGzzyCSL/DarkRoom</string>
-
     <string name="title_activity_jump">JumpActivity</string>
+    <string name="launchFailedPleaseManual">启动app失败，请尝试手动启动</string>
 </resources>

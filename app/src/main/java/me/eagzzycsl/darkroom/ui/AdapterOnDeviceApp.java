@@ -22,7 +22,7 @@ class AdapterOnDeviceApp extends BaseAdapter<OnDeviceApp> {
 
     @Override
     public UserHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new UserHolder(LayoutInflater.from(context).inflate(getLayoutId(), parent, false));
+        return new UserHolder(LayoutInflater.from(getContext()).inflate(getLayoutId(), parent, false));
     }
 
     private class UserHolder extends RecViewHolder<OnDeviceApp> implements View.OnClickListener {
@@ -43,9 +43,9 @@ class AdapterOnDeviceApp extends BaseAdapter<OnDeviceApp> {
             item_name.setText(onDeviceApp.getAppName());
             item_icon.setImageDrawable(onDeviceApp.getAppIcon());
             if (onDeviceApp.getFrozen()) {
-                item_name.setTextColor(context.getColor(R.color.colorPrimary));
+                item_name.setTextColor(getContext().getColor(R.color.colorPrimary));
             } else {
-                item_name.setTextColor(context.getColor(android.R.color.black));
+                item_name.setTextColor(getContext().getColor(android.R.color.black));
             }
             itemView.setTag(onDeviceApp);
         }

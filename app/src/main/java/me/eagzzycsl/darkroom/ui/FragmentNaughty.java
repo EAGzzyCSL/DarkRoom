@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-import me.eagzzycsl.darkroom.access.AppList;
+import me.eagzzycsl.darkroom.manager.AppList;
 import me.eagzzycsl.darkroom.model.NaughtyApp;
 
 public class FragmentNaughty extends BaseFragment<NaughtyApp> {
@@ -18,7 +18,7 @@ public class FragmentNaughty extends BaseFragment<NaughtyApp> {
     @Override
     public void onResume() {
         super.onResume();
-        naughtyApps = AppList.getNaughtyApps();
+        naughtyApps = AppList.INSTANCE.getNaughtyApps();
         setData(naughtyApps);
     }
 
