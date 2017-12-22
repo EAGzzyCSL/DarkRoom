@@ -2,6 +2,12 @@
 
 适用于htc Sense系统（目前只在我7.0的u11上测试过）的免root免adb的app冻结工具
 
+## 下载地址
+
+- [github release](https://github.com/EAGzzyCSL/DarkRoom/releases/tag/v1.0)
+
+- [百度网盘](https://pan.baidu.com/s/1pKQ5Ip9)
+
 ## 工作原理
 
 - htc的Sense系统在查看第三方的app时存在一个停用按钮，点击停用按钮即可停用该app，停用后app便处于冻结状态，不会有后台进程，消息推送等行为。再次点击启用即可启用该app。
