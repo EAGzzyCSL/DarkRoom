@@ -12,6 +12,11 @@ import me.eagzzycsl.darkroom.model.MyApp
 import me.eagzzycsl.darkroom.utils.ConstantString
 
 object AppManager {
+    private val enableState = arrayOf(
+            PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+    )
+
     fun launchApp(context: Context, app: MyApp) {
         val intent = context.packageManager.getLaunchIntentForPackage(app.pkgName)
         if (intent != null) {
@@ -22,10 +27,10 @@ object AppManager {
     }
 
     fun isEnable(context: Context, app: MyApp): Boolean {
-        return context.
+        return enableState.contains(context.
                 packageManager.
-                getApplicationEnabledSetting(app.pkgName)==
-                PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
+                getApplicationEnabledSetting(app.pkgName)
+        )
     }
 
     fun gotoSettings(context: Context, myApp: MyApp) {
