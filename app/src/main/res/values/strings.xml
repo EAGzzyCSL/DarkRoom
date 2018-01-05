@@ -4,9 +4,9 @@
     <string name="title_activity_naughty_pick">选择需要冻结的应用</string>
     <string name="action_settings">设置</string>
     <string name="action_edit">编辑</string>
+    <string name="action_backup_restore">备份恢复</string>
     <string name="action_about">关于</string>
     <string name="title_activity_about">关于</string>
     <string name="url_official_website">https://github.com/EAGzzyCSL/DarkRoom</string>
-
     <string name="title_activity_jump">JumpActivity</string>
 </resources>

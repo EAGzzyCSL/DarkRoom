@@ -113,7 +113,11 @@ public class MainActivity extends ActivityToolbar implements View.OnClickListene
                 ));
                 break;
             }
-            case R.id.action_settings: {
+            case R.id.action_backup_restore: {
+                startActivity(new Intent(
+                        this,
+                        BackRestoreActivity.class
+                ));
                 break;
             }
             case R.id.action_about: {
