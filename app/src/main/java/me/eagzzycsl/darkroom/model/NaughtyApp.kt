@@ -1,7 +1,6 @@
 package me.eagzzycsl.darkroom.model
 
 import android.content.Context
-import android.widget.Toast
 import me.eagzzycsl.darkroom.manager.AppManager
 
 import me.eagzzycsl.darkroom.manager.DarkManager

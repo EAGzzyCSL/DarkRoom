@@ -15,11 +15,10 @@ abstract class ActivityToolbar : AppCompatActivity() {
         setContentView(getLayoutId())
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        if (supportActionBar != null) {
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            supportActionBar!!.setDisplayShowHomeEnabled(true)
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         toolbar.setNavigationOnClickListener { finish() }
     }
-    abstract  fun getLayoutId():Int
+
+    abstract fun getLayoutId(): Int
 }

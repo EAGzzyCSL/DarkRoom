@@ -9,8 +9,8 @@ import java.util.*
 object ActionQueue {
     val allResolve: Boolean
         get() = doneAmount == actions.size;
-    var doneAmount = 0;
-    var cursor = 0;
+    private var doneAmount = 0;
+    private var cursor = 0;
     val actions: LinkedList<AutoAction> = LinkedList<AutoAction>()
     fun reset() {
         actions.clear()
@@ -45,7 +45,7 @@ object ActionQueue {
     }
 
     @Synchronized
-    fun appendAll(newActions: Array<out AutoAction>) {
+    fun appendAll(newActions: List<AutoAction>) {
         actions.addAll(newActions)
     }
 

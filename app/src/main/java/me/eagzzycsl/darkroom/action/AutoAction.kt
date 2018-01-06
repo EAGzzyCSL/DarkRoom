@@ -20,7 +20,7 @@ abstract class AutoAction(val app: MyApp) {
 
     fun accept(name: String) {
         if (this.status != ActionStatus.Running) {
-            return;
+            return
         }
         this.onAccept(name);
     }
@@ -47,7 +47,4 @@ abstract class AutoAction(val app: MyApp) {
     }
 
 
-    fun findNodeById(nodeInfo: AccessibilityNodeInfo?, id: String): AccessibilityNodeInfo? {
-        return nodeInfo?.findAccessibilityNodeInfosByViewId(id)?.get(0)
-    }
 }

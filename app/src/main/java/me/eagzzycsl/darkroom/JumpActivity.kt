@@ -11,9 +11,8 @@ class JumpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jump)
-        val intent = intent
         val pkgName = intent.getStringExtra(ConstantString.pkgName)
-        val naughtyApp = AppList.getNaughtApp(pkgName)
+        val naughtyApp = AppList.createNaughtAppFromPkgName(pkgName)
         naughtyApp?.launch(this)
         finish()
     }

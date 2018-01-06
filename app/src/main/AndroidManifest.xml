@@ -6,7 +6,8 @@
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    in
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -24,12 +25,20 @@
         </activity>
         <activity
             android:name=".NaughtyPickActivity"
-            android:label="@string/title_activity_naughty_pick"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_naughty_pick" />
         <activity
             android:name=".AboutActivity"
-            android:label="@string/title_activity_about"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_about" />
+        <activity
+            android:name=".JumpActivity"
+            android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".EasyFreezeActivity"
+            android:label="@string/title_activity_easy_freeze" />
 
         <service
             android:name=".AutoService"
@@ -43,14 +52,6 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessible_service_config" />
         </service>
-
-        <activity
-            android:name=".JumpActivity"
-            android:launchMode="singleInstance">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

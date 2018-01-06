@@ -18,8 +18,8 @@ object DarkManager {
 
     val inWorking
         get() = working;
-    var working = false;
-    var workMode = WorkMode.FreezeAll;
+    private var working = false;
+    private var workMode = WorkMode.FreezeAll;
     private fun init(workMode: WorkMode) {
         this.workMode = workMode
         ActionQueue.reset();
@@ -38,16 +38,16 @@ object DarkManager {
         DarkTask().execute(context)
     }
 
-    fun freezeAll(naughtyApps: Array<out NaughtyApp>, context: Context) {
+    fun freezeAll(naughtyApps: List<NaughtyApp>, context: Context) {
 
         this.init(WorkMode.FreezeAll)
-        ActionQueue.appendAll(naughtyApps.map { FreezeAction(it) }.toTypedArray<FreezeAction>())
+        ActionQueue.appendAll(naughtyApps.map { FreezeAction(it) })
         DarkTask().execute(context)
     }
 
     fun releaseAll(naughtyApps: Array<out NaughtyApp>, context: Context) {
         this.init(WorkMode.ReleaseAll)
-        ActionQueue.appendAll(naughtyApps.map { ReleaseAction(it) }.toTypedArray<ReleaseAction>())
+        ActionQueue.appendAll(naughtyApps.map { ReleaseAction(it) })
         DarkTask().execute(context)
     }
 
@@ -71,7 +71,7 @@ object DarkManager {
 
             }
             WorkMode.FreezeAll -> {
-
+                // TODO 冻结了几个
                 Toast.makeText(context, "冻结完成", Toast.LENGTH_SHORT).show()
             }
         }

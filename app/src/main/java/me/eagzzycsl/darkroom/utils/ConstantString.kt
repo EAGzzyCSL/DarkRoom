@@ -21,8 +21,16 @@ object ConstantString {
         val buttonEnableDisable = "com.android.settings:id/htc_uninstall_button"
     }
 
+    object SettingActivityName {
+        val appDetail = "com.android.settings.applications.InstalledAppDetailsTop"
+        val appNotification ="com.android.settings.Settings\$AppNotificationSettingsActivity"
+    }
+    object EasyFreezeWidgetId {
+        val appNameInNotify = "com.android.settings:id/app_name"
+        val appNameFrameInAppDetail= "com.android.settings:id/app_text"
+    }
     val _package = "package"
-    val setting_detail_activity_name = "com.android.settings.applications.InstalledAppDetailsTop"
     val pkgName = "pkgName"
     val ACTION_ADD_SHORTCUT = "com.android.launcher.action.INSTALL_SHORTCUT"
+    val easyFreezeExtraKeyAppName="appName"
 }

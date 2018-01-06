@@ -17,8 +17,6 @@ import me.eagzzycsl.darkroom.R
 abstract class BaseFragment<M : MyApp> : Fragment() {
     private var recyclerView: RecyclerView? = null
     private var adapter: BaseAdapter<M>? = null
-    var isContainData = false
-        private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,32 +25,26 @@ abstract class BaseFragment<M : MyApp> : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView!!.adapter = adapter
-        recyclerView!!.layoutManager = LinearLayoutManager(activity)
-        recyclerView!!.itemAnimator = DefaultItemAnimator()
+        recyclerView?.adapter = adapter
+        recyclerView?.layoutManager = LinearLayoutManager(activity)
+        recyclerView?.itemAnimator = DefaultItemAnimator()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater!!.inflate(R.layout.layout_rec_fragment, container, false)
-        recyclerView = view.findViewById(R.id.fragment_recyclerView)
+        val view = inflater?.inflate(R.layout.layout_rec_fragment, container, false)
+        recyclerView = view?.findViewById(R.id.fragment_recyclerView)
         return view
     }
 
     abstract fun getAdapter(): BaseAdapter<M>
 
     fun setData(dataArray: ArrayList<M>) {
-        if (adapter !=
-                null) {
-            adapter!!.setDataArray(dataArray)
-            isContainData = true
-            adapter!!.notifyDataSetChanged()
-        }
+        adapter?.setDataArray(dataArray)
+        adapter?.notifyDataSetChanged()
     }
 
     fun updateData() {
-        if (adapter != null) {
-            adapter!!.notifyDataSetChanged()
-        }
+        adapter?.notifyDataSetChanged()
     }
 
 }

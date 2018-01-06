@@ -6,13 +6,14 @@ import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.view.View
 
-import me.eagzzycsl.darkroom.db.SQLMan
 import me.eagzzycsl.darkroom.manager.AppList
+import me.eagzzycsl.darkroom.model.NaughtyApp
 import me.eagzzycsl.darkroom.ui.ActivityToolbar
 import me.eagzzycsl.darkroom.ui.FragmentOnDeviceApp
 import me.eagzzycsl.darkroom.ui.FragmentSysApp
 import me.eagzzycsl.darkroom.ui.FragmentUserApp
 import me.eagzzycsl.darkroom.ui.PickPagerAdapter
+import java.util.*
 
 class NaughtyPickActivity : ActivityToolbar(), View.OnClickListener {
     private var pick_viewPager: ViewPager? = null
@@ -22,14 +23,14 @@ class NaughtyPickActivity : ActivityToolbar(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pick_tab = findViewById<View>(R.id.pick_tab) as TabLayout
-        pick_viewPager = findViewById<View>(R.id.pick_pager) as ViewPager
-        val fab = findViewById<View>(R.id.fab) as FloatingActionButton
+        pick_tab = findViewById<TabLayout>(R.id.pick_tab)
+        pick_viewPager = findViewById<ViewPager>(R.id.pick_pager)
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener(this)
-        pick_tab!!.setupWithViewPager(pick_viewPager)
-        pick_viewPager!!.adapter = PickPagerAdapter(
+        pick_tab?.setupWithViewPager(pick_viewPager)
+        pick_viewPager?.adapter = PickPagerAdapter(
                 supportFragmentManager,
-                arrayOf<FragmentOnDeviceApp<*>>(fragmentUserApp, fragmentSysApp)
+                arrayOf<FragmentOnDeviceApp>(fragmentUserApp, fragmentSysApp)
         )
     }
 
@@ -40,10 +41,10 @@ class NaughtyPickActivity : ActivityToolbar(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.fab -> {
-                SQLMan.getInstance(this)!!.remove()
-                AppList.clearNaughtyApps()
-                fragmentUserApp.savePick()
-                fragmentSysApp.savePick()
+                val naughtyApps = LinkedList<NaughtyApp>()
+                naughtyApps.addAll(fragmentUserApp.genSelectedApps())
+                naughtyApps.addAll(fragmentSysApp.genSelectedApps())
+                AppList.saveNaughtyApps(this, naughtyApps)
                 finish()
             }
         }

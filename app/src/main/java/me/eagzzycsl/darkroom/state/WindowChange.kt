@@ -4,7 +4,7 @@ import me.eagzzycsl.darkroom.utils.ConstantString
 
 enum class WindowChange(private val changeName: String) {
     Init(ConstantString.WindowChange.init),
-    AppDetail(ConstantString.setting_detail_activity_name),
+    AppDetail(ConstantString.SettingActivityName.appDetail),
     None(ConstantString.WindowChange.none),
     OutOfException(ConstantString.WindowChange.outOfException);
 

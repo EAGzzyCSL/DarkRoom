@@ -2,7 +2,6 @@ package me.eagzzycsl.darkroom.manager
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 
 import java.util.ArrayList
 import java.util.HashMap
@@ -14,80 +13,79 @@ import me.eagzzycsl.darkroom.model.OnDeviceApp
 
 
 object AppList {
+    private val metaApps = HashMap<String, MetaApp>()
     val naughtyApps = ArrayList<NaughtyApp>()
     val sysApps = ArrayList<OnDeviceApp>()
     val userApps = ArrayList<OnDeviceApp>()
-    private val apps = HashMap<String, MetaApp>()
+    val easyFreezeApps = ArrayList<OnDeviceApp>()
+
+    fun genEasyFreezeApps(appName: String) {
+        easyFreezeApps.clear()
+        easyFreezeApps.addAll(
+                metaApps.filter { it.value.appName == appName }.map { OnDeviceApp(it.value) }
+        )
+    }
 
     fun init(context: Context) {
-        getOnDeviceApp(context)
+        initOnDeviceApp(context)
         naughtyApps.clear()
-        naughtyApps.addAll(SQLMan.getInstance(context)!!.readAll())
-
+        naughtyApps.addAll(SQLMan.readAll(context))
     }
 
-    fun getMetaApp(pkgName: String): MetaApp? {
-        return apps[pkgName]
-    }
-
-    fun getNaughtApp(pkgName: String): NaughtyApp? {
-        val metaApp = getMetaApp(pkgName)
-        return if (metaApp == null) null else NaughtyApp(metaApp)
-    }
-
-    fun addMetaApp(metaApp: MetaApp?) {
-        val pkgName = metaApp!!.pkgName
-        (apps as java.util.Map<String, MetaApp>).putIfAbsent(pkgName, metaApp)
-    }
-
-    fun clearNaughtyApps() {
-        naughtyApps.clear()
-    }
-
-    fun addNaughtyApp(naughtyApp: NaughtyApp) {
-        naughtyApps.add(naughtyApp)
-    }
-
-    fun appInNaughty(onDeviceApp: OnDeviceApp): Boolean {
-        return naughtyApps.stream().anyMatch { naughtyApp -> naughtyApp.metaApp == onDeviceApp.metaApp }
-    }
-
-    fun getOnDeviceApp(context: Context) {
+    private fun initOnDeviceApp(context: Context) {
         userApps.clear()
         sysApps.clear()
         val pm = context.packageManager
         val apps = pm.getInstalledApplications(0)
         for (app in apps) {
-            // updated system app
-            if (app.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0) {
-                //system app
-            } else if (app.flags and ApplicationInfo.FLAG_SYSTEM != 0) {
-                addToList(sysApps, app, pm)
-                // user-installed app
-            } else {
-                addToList(userApps, app, pm)
+            val metaApp = MetaApp(
+                    app.loadLabel(pm).toString(),
+                    app.packageName,
+                    app.loadIcon(pm)
+            )
+            metaApps.put(app.packageName, metaApp)
+            when {
+//                app.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0 ||
+                app.flags and ApplicationInfo.FLAG_SYSTEM != 0
+                -> {
+                    sysApps.add(OnDeviceApp(metaApp))
+                }
+                else -> {
 
+                    userApps.add(OnDeviceApp(metaApp))
+                }
             }
         }
     }
 
-    fun addToList(
-            apps: ArrayList<OnDeviceApp>,
-            app: ApplicationInfo,
-            pm: PackageManager
-    ) {
-        val pkgName = app.packageName
-
-        val metaApp = if (getMetaApp(pkgName) == null)
-            MetaApp(
-                    app.loadLabel(pm).toString(),
-                    pkgName,
-                    app.loadIcon(pm)
-            )
-        else
-            getMetaApp(pkgName)
-        addMetaApp(metaApp)
-        apps.add(OnDeviceApp(metaApp!!))
+    fun addNaughtyAppFromDataBase(pkgName: String) {
+        // 如果未安装就不展示(新安装的app)
+        val naughtyApp = createNaughtAppFromPkgName(pkgName)
+        if (naughtyApp != null) {
+            naughtyApps.add(naughtyApp)
+        }
     }
+
+    fun createNaughtAppFromPkgName(pkgName: String): NaughtyApp? {
+        val metaApp = metaApps[pkgName]
+        return if (metaApp == null) null else NaughtyApp(metaApp)
+    }
+
+    fun saveNaughtyApps(context: Context, naughtyAppToAdd: List<NaughtyApp>) {
+        SQLMan.remove(context)
+        this.naughtyApps.clear()
+        AppList.naughtyApps.addAll(naughtyAppToAdd)
+        SQLMan.insertNaughtyApps(context, this.naughtyApps)
+    }
+
+    fun appendNaughtyApps(context: Context, naughtyAppToAdd: List<NaughtyApp>) {
+        AppList.naughtyApps.addAll(naughtyAppToAdd)
+        SQLMan.insertNaughtyApps(context, this.naughtyApps)
+    }
+
+    fun isNaughtyApp(onDeviceApp: OnDeviceApp): Boolean {
+        return naughtyApps.any { it -> it.metaApp == onDeviceApp.metaApp }
+    }
+
 
 }

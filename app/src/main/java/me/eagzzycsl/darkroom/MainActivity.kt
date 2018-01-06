@@ -7,9 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 
-import java.util.ArrayList
-
-import me.eagzzycsl.darkroom.model.NaughtyApp
 import me.eagzzycsl.darkroom.ui.ActivityToolbar
 import me.eagzzycsl.darkroom.ui.FragmentNaughty
 import me.eagzzycsl.darkroom.manager.DarkManager
@@ -18,7 +15,6 @@ import me.eagzzycsl.darkroom.utils.MyConfig
 import me.eagzzycsl.darkroom.utils.PermissionChecker
 
 class MainActivity : ActivityToolbar(), View.OnClickListener {
-    private var naughtyApps: ArrayList<NaughtyApp>? = null
     private var naughtyFragment: FragmentNaughty? = null
     private var fab_add: FloatingActionButton? = null
 
@@ -38,11 +34,11 @@ class MainActivity : ActivityToolbar(), View.OnClickListener {
     private fun myFind() {
         fab_add = findViewById<View>(R.id.fab_add) as FloatingActionButton
         naughtyFragment = supportFragmentManager.findFragmentById(R.id.fragment_naughty) as FragmentNaughty
-
     }
 
     private fun myRead() {
         AppList.init(this)
+        naughtyFragment?.updateData()
     }
 
     private fun myCreate() {
@@ -50,7 +46,7 @@ class MainActivity : ActivityToolbar(), View.OnClickListener {
     }
 
     private fun mySet() {
-        fab_add!!.setOnClickListener(this)
+        fab_add?.setOnClickListener(this)
         if (MyConfig.DEBUG && MyConfig.NO_CHECK_ACCESS) {
             return
         }
@@ -61,8 +57,7 @@ class MainActivity : ActivityToolbar(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.fab_add -> {
-                naughtyApps = naughtyFragment!!.data
-                DarkManager.freezeAll(naughtyApps!!.filter { it.isEnable(this) }.toTypedArray(), this);
+                DarkManager.freezeAll(AppList.naughtyApps.filter { it.isEnable(this) }, this)
             }
         }
     }
