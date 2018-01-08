@@ -79,6 +79,7 @@ object AppList {
     }
 
     fun appendNaughtyApps(context: Context, naughtyAppToAdd: List<NaughtyApp>) {
+        AppList.naughtyApps.clear()
         AppList.naughtyApps.addAll(naughtyAppToAdd)
         SQLMan.insertNaughtyApps(context, this.naughtyApps)
     }

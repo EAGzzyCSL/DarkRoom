@@ -10,6 +10,7 @@ import me.eagzzycsl.darkroom.MainActivity
 import me.eagzzycsl.darkroom.R
 import me.eagzzycsl.darkroom.model.MyApp
 import me.eagzzycsl.darkroom.utils.ConstantString
+import me.eagzzycsl.darkroom.utils.MyConfig
 
 object AppManager {
     private val enableState = arrayOf(
@@ -18,12 +19,17 @@ object AppManager {
     )
 
     fun launchApp(context: Context, app: MyApp) {
-        val intent = context.packageManager.getLaunchIntentForPackage(app.pkgName)
-        if (intent != null) {
-            context.startActivity(intent)
-        } else {
-            Toast.makeText(context, R.string.launchFailedPleaseManual, Toast.LENGTH_SHORT).show()
-        }
+        // 使用循环保证intent不为null
+        var times = 0
+        do {
+            val intent = context.packageManager.getLaunchIntentForPackage(app.pkgName)
+            times++
+            if (intent != null) {
+                context.startActivity(intent)
+                return
+            }
+        } while (times < MyConfig.retryTimes)
+        Toast.makeText(context, R.string.launchFailedPleaseManual, Toast.LENGTH_SHORT).show()
     }
 
     fun isEnable(context: Context, app: MyApp): Boolean {

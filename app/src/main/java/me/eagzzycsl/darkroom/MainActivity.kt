@@ -11,6 +11,7 @@ import me.eagzzycsl.darkroom.ui.ActivityToolbar
 import me.eagzzycsl.darkroom.ui.FragmentNaughty
 import me.eagzzycsl.darkroom.manager.DarkManager
 import me.eagzzycsl.darkroom.manager.AppList
+import me.eagzzycsl.darkroom.manager.SettingsManager
 import me.eagzzycsl.darkroom.utils.MyConfig
 import me.eagzzycsl.darkroom.utils.PermissionChecker
 
@@ -25,6 +26,7 @@ class MainActivity : ActivityToolbar(), View.OnClickListener {
         myRead()
         myCreate()
         mySet()
+        SettingsManager.updateValues(this)
     }
 
     override fun getLayoutId(): Int {
@@ -76,6 +78,10 @@ class MainActivity : ActivityToolbar(), View.OnClickListener {
                 ))
             }
             R.id.action_settings -> {
+                startActivity(Intent(
+                        this,
+                        SettingsActivity::class.java
+                ))
             }
             R.id.action_about -> {
                 startActivity(Intent(

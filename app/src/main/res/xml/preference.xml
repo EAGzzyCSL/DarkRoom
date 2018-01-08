@@ -1,0 +1,27 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/category_autoFinish">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_autoFinishAfterFreeze"
+            android:summary="@string/summary_autoFinishAfterFreeze"
+            android:title="@string/title_autoFinishAfterFreeze" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_autoFinishAfterLaunch"
+            android:summary="@string/summary_autoFinishAfterLaunch"
+            android:title="@string/title_autoFinishAfterLaunch" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/category_showEasyFreeze">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_showEasyFreezeInDetail"
+            android:summary="@string/summary_showEasyFreezeInDetail"
+            android:title="@string/summary_showEasyFreezeInDetail" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_showEasyFreezeInNotify"
+            android:summary="@string/summary_showEasyFreezeInNotify"
+            android:title="@string/title_showEasyFreezeInNotify" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
