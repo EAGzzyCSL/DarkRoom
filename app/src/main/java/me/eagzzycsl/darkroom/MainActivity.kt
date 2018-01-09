@@ -22,6 +22,13 @@ class MainActivity : ActivityToolbar(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (MyConfig.ifShowGuideActivity(this)) {
+            startActivity(Intent(
+                    this, GuideActivity::class.java
+            ))
+            finish()
+            return
+        }
         myFind()
         myRead()
         myCreate()

@@ -11,6 +11,9 @@
     <string name="title_activity_jump">JumpActivity</string>
     <string name="title_activity_settings">设置</string>
     <string name="launchFailedPleaseManual">启动app失败，请尝试手动启动</string>
+    <string name="jump">跳过</string>
+    <string name="next">下一步</string>
+    <string name="done">完成</string>
     <!--key-->
     <string name="key_autoFinishAfterFreeze">autoFinishAfterFreeze</string>
     <string name="key_autoFinishAfterLaunch">autoFinishAfterLaunch</string>

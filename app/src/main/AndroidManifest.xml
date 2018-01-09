@@ -44,6 +44,12 @@
             android:name=".EasyFreezeActivity"
             android:label="@string/title_activity_easy_freeze" />
 
+        <activity
+            android:name=".GuideActivity"
+            android:theme="@style/AppTheme.NoActionBar.Immersive">
+
+        </activity>
+
         <service
             android:name=".AutoService"
             android:label="@string/app_name"
@@ -56,6 +62,7 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessible_service_config" />
         </service>
+
     </application>
 
 </manifest>

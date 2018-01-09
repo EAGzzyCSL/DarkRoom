@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_guide"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.eagzzycsl.darkroom.GuideActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="me.eagzzycsl.darkroom.NaughtyPickActivity"
+        tools:showIn="@layout/activity_naughty_pick">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/guide_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#55aaaaaa" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/guide_tab"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:rotation="180"
+                    android:rotationY="180"
+                    app:tabGravity="fill"
+                    app:tabMode="fixed" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/button_skip"
+                        style="@style/GuideActivityButton"
+                        android:text="@string/jump" />
+
+                    <Button
+                        android:id="@+id/button_next"
+                        style="@style/GuideActivityButton"
+                        android:text="@string/next" />
+
+                    <Button
+                        android:id="@+id/button_done"
+                        style="@style/GuideActivityButton"
+                        android:text="@string/done"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
