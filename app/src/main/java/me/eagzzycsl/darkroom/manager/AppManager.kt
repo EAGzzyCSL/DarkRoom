@@ -33,16 +33,14 @@ object AppManager {
     }
 
     fun isEnable(context: Context, app: MyApp): Boolean {
-        return enableState.contains(context.
-                packageManager.
-                getApplicationEnabledSetting(app.pkgName)
+        return enableState.contains(context.packageManager.getApplicationEnabledSetting(app.pkgName)
         )
     }
 
     fun gotoSettings(context: Context, myApp: MyApp) {
         val intent = Intent()
         intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-        val uri = Uri.fromParts(ConstantString._package, myApp.pkgName, null)
+        val uri = Uri.fromParts(ConstantString.LiteralText.pack_age, myApp.pkgName, null)
         intent.data = uri
         context.startActivity(intent)
     }

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager.NameNotFoundException
 import android.view.accessibility.AccessibilityEvent
 import me.eagzzycsl.darkroom.manager.DarkManager
 import me.eagzzycsl.darkroom.manager.EasyFreezeManager
+import me.eagzzycsl.darkroom.manager.SettingsManager
 
 import me.eagzzycsl.darkroom.task.ActionQueue
 import me.eagzzycsl.darkroom.utils.ConstantString
@@ -40,10 +41,12 @@ class AutoService : AccessibilityService() {
                     ActionQueue.accept(activityName)
                     ActionQueue.react(rootInActiveWindow)
                 } else {
-                    if (activityName == ConstantString.SettingActivityName.appNotification) {
+                    if (SettingsManager.showEasyFreezeInNotify
+                            && activityName == ConstantString.SettingActivityName.appNotification) {
                         EasyFreezeManager.reactAppNotifySettings(this, rootInActiveWindow)
                     }
-                    if (activityName == ConstantString.SettingActivityName.appDetail) {
+                    if (SettingsManager.showEasyFreezeInDetail
+                            && activityName == ConstantString.SettingActivityName.appDetail) {
                         EasyFreezeManager.reactAppDetail(this, rootInActiveWindow)
                     }
                 }

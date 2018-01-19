@@ -10,7 +10,7 @@ import me.eagzzycsl.darkroom.utils.ConstantString
 
 class EasyFreezeActivity : ActivityToolbar(), View.OnClickListener {
     private var easyFreezeFragment: FragmentEasyFreeze? = null
-    private var fab_confirm: FloatingActionButton? = null
+    private var fabConfirm: FloatingActionButton? = null
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.fab_confirm -> {
@@ -33,7 +33,7 @@ class EasyFreezeActivity : ActivityToolbar(), View.OnClickListener {
         AppList.genEasyFreezeApps(appName)
         easyFreezeFragment = supportFragmentManager.findFragmentById(R.id.fragment_easy_freeze) as FragmentEasyFreeze
         easyFreezeFragment?.updateData()
-        fab_confirm = findViewById<FloatingActionButton>(R.id.fab_confirm)
-        fab_confirm?.setOnClickListener(this)
+        fabConfirm = findViewById<FloatingActionButton>(R.id.fab_confirm)
+        fabConfirm?.setOnClickListener(this)
     }
 }

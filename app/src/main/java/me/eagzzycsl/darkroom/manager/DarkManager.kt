@@ -3,6 +3,7 @@ package me.eagzzycsl.darkroom.manager
 import android.app.Activity
 import android.content.Context
 import android.widget.Toast
+import me.eagzzycsl.darkroom.R
 import me.eagzzycsl.darkroom.action.FreezeAction
 import me.eagzzycsl.darkroom.action.ReleaseAction
 import me.eagzzycsl.darkroom.model.NaughtyApp
@@ -61,7 +62,6 @@ object DarkManager {
         AppManager.letMeTop(context)
         when (workMode) {
             WorkMode.ReleaseAndLaunchOne -> {
-                // TODO：从actions里面拿似乎不太方便
                 val theAction = ActionQueue.actions[0]
                 AppManager.launchApp(context, theAction.app)
                 if (SettingsManager.autoFinishAfterLaunch) {
@@ -75,8 +75,11 @@ object DarkManager {
 
             }
             WorkMode.FreezeAll -> {
-                // TODO 冻结了几个
-                Toast.makeText(context, "冻结完成", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                        context,
+                        "${ActionQueue.actions.size}${context.getString(R.string.freezeAppDone)}",
+                        Toast.LENGTH_SHORT
+                ).show()
                 if (SettingsManager.autoFinishAfterFreeze) {
                     (context as Activity).finish()
                 }

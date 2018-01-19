@@ -14,6 +14,7 @@
     <string name="jump">跳过</string>
     <string name="next">下一步</string>
     <string name="done">完成</string>
+    <string name="freezeAppDone">个应用冻结完成！</string>
     <!--key-->
     <string name="key_autoFinishAfterFreeze">autoFinishAfterFreeze</string>
     <string name="key_autoFinishAfterLaunch">autoFinishAfterLaunch</string>
