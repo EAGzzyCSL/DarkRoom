@@ -6,13 +6,15 @@ object AboutDb {
     object NaughtyTable {
 
         object FILED {
-            val ID = "_ID"
-            val pkgName = "pkgName"
+            const val ID = "_ID"
+            const val pkgName = "pkgName"
+            const val isNaughty = "isNaughty"
+            const val freezeNotifyTimes = "freezeNotifyTimes"
         }
 
-        val TABLE_NAME = "naughty"
+        const val TABLE_NAME = "naughty"
     }
 
-    val DB_NAME = "DarkRoom"
-    val DB_VERSION = 1
+    const val DB_NAME = "DarkRoom"
+    const val DB_VERSION = 2
 }
