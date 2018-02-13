@@ -5,11 +5,13 @@
     android:layout_height="60dp"
     android:gravity="center_vertical"
     android:orientation="horizontal">
+
     <ImageView
         android:id="@+id/item_icon"
-        android:layout_margin="10dp"
         android:layout_width="40dp"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        android:layout_margin="10dp" />
+
     <TextView
         android:id="@+id/item_name"
         android:layout_width="match_parent"

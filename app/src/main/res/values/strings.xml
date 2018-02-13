@@ -5,8 +5,29 @@
     <string name="action_settings">设置</string>
     <string name="action_edit">编辑</string>
     <string name="action_about">关于</string>
+    <string name="title_activity_easy_freeze">快速加入冻结列表</string>
     <string name="title_activity_about">关于</string>
     <string name="url_official_website">https://github.com/EAGzzyCSL/DarkRoom</string>
-
     <string name="title_activity_jump">JumpActivity</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="launchFailedPleaseManual">启动app失败，请尝试手动启动</string>
+    <string name="jump">跳过</string>
+    <string name="next">下一步</string>
+    <string name="done">完成</string>
+    <string name="freezeAppDone">个应用冻结完成！</string>
+    <!--key-->
+    <string name="key_autoFinishAfterFreeze">autoFinishAfterFreeze</string>
+    <string name="key_autoFinishAfterLaunch">autoFinishAfterLaunch</string>
+    <string name="key_showEasyFreezeInDetail">showEasyFreezeInDetail</string>
+    <string name="key_showEasyFreezeInNotify">showEasyFreezeInNotify</string>
+    <string name="category_autoFinish">自动退出</string>
+    <string name="category_showEasyFreeze">显示快速冻结通知</string>
+    <string name="summary_autoFinishAfterFreeze">当冻结任务完成后，小黑屋会自动退出</string>
+    <string name="summary_autoFinishAfterLaunch">当解冻任务完成后，小黑屋会自动退出</string>
+    <string name="summary_showEasyFreezeInDetail">在查看app的详情时展示快速冻结通知</string>
+    <string name="summary_showEasyFreezeInNotify">在这是app的通知时展示快速冻结通知</string>
+    <string name="title_autoFinishAfterFreeze">冻结完自动的退出</string>
+    <string name="title_autoFinishAfterLaunch">解冻app后自动退出</string>
+    <string name="title_showEasyFreezeInDetail">应用详情快速冻结</string>
+    <string name="title_showEasyFreezeInNotify">通知管理快速冻结</string>
 </resources>

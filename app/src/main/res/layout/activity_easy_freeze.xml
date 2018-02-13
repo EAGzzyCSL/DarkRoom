@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.eagzzycsl.darkroom.NaughtyPickActivity">
+    tools:context="me.eagzzycsl.darkroom.EasyFreezeActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,19 +20,20 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
     <fragment
-        android:id="@+id/fragment_naughty"
-        android:name="me.eagzzycsl.darkroom.ui.FragmentNaughty"
+        android:id="@+id/fragment_easy_freeze"
+        android:name="me.eagzzycsl.darkroom.ui.FragmentEasyFreeze"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add"
+        android:id="@+id/fab_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_power_settings_white" />
+        android:src="@drawable/ic_done_white" />
 
 </android.support.design.widget.CoordinatorLayout>
