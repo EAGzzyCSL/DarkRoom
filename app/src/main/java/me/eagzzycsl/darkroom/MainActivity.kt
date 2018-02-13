@@ -26,7 +26,7 @@ class MainActivity : ActivityToolbar(), View.OnClickListener {
             startActivity(Intent(
                     this, GuideActivity::class.java
             ))
-            finish()
+            moveTaskToBack(true)
             return
         }
         myFind()

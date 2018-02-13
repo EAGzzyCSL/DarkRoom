@@ -37,25 +37,14 @@ object AppList {
         sysApps.clear()
         val pm = context.packageManager
         val apps = pm.getInstalledApplications(0)
-        for (app in apps) {
+        apps.filter { it.flags and ApplicationInfo.FLAG_SYSTEM != 1 }.forEach({
             val metaApp = MetaApp(
-                    app.loadLabel(pm).toString(),
-                    app.packageName,
-                    app.loadIcon(pm)
+                    it.loadLabel(pm).toString(),
+                    it.packageName,
+                    it.loadIcon(pm)
             )
-            metaApps.put(app.packageName, metaApp)
-            when {
-//                app.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0 ||
-                app.flags and ApplicationInfo.FLAG_SYSTEM != 0
-                -> {
-                    sysApps.add(OnDeviceApp(metaApp))
-                }
-                else -> {
-
-                    userApps.add(OnDeviceApp(metaApp))
-                }
-            }
-        }
+            metaApps[it.packageName] = metaApp
+        })
     }
 
     fun addNaughtyAppFromDataBase(pkgName: String) {

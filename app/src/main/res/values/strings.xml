@@ -30,4 +30,14 @@
     <string name="title_autoFinishAfterLaunch">解冻app后自动退出</string>
     <string name="title_showEasyFreezeInDetail">应用详情快速冻结</string>
     <string name="title_showEasyFreezeInNotify">通知管理快速冻结</string>
+
+    <!---->
+    <string name="category_advancedSettings">高级设置</string>
+    <string name="key_showManualDisabledApp">showManualDisabledApp</string>
+    <string name="title_showManualDisabledApp">独立显示手动禁用的应用</string>
+    <string name="summary_showManualDisabledApp">非通过小黑屋冻结的app会单独显示方便管理</string>
+    <string name="key_showSysApp">showSysApp</string>
+    <string name="title_showSysApp">显示系统应用</string>
+    <string name="summary_showSysApp">可以对系统应用进行冻结操作</string>
+
 </resources>

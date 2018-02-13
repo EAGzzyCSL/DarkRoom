@@ -23,5 +23,17 @@
             android:summary="@string/summary_showEasyFreezeInNotify"
             android:title="@string/title_showEasyFreezeInNotify" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/category_advancedSettings">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_showManualDisabledApp"
+            android:summary="@string/summary_showManualDisabledApp"
+            android:title="@string/summary_showManualDisabledApp" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_showSysApp"
+            android:summary="@string/summary_showSysApp"
+            android:title="@string/summary_showSysApp" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
