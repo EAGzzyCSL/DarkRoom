@@ -5,31 +5,26 @@ import android.os.Bundle
 import java.util.ArrayList
 
 import me.eagzzycsl.darkroom.manager.AppList
-import me.eagzzycsl.darkroom.model.NaughtyApp
-import me.eagzzycsl.darkroom.model.OnDeviceApp
+import me.eagzzycsl.darkroom.model.MetaApp
 
 
-abstract class FragmentOnDeviceApp : BaseFragment<OnDeviceApp>() {
+abstract class FragmentOnDeviceApp : BaseFragment<MetaApp>() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.markFrozen()
+        AppList.markFrozen()
         setData(getOnDeviceApps())
     }
 
-    abstract fun getOnDeviceApps(): ArrayList<OnDeviceApp>
+    abstract fun getOnDeviceApps(): ArrayList<MetaApp>
 
-    private fun markFrozen() {
-        getOnDeviceApps().forEach { it -> it.frozen = AppList.isNaughtyApp(it) }
+
+    fun genSelectedApps(): List<MetaApp> {
+        return getOnDeviceApps().filter { it.willFreeze }
     }
 
-
-    fun genSelectedApps(): List<NaughtyApp> {
-        return getOnDeviceApps().filter { it.frozen }.map { it.toNaughtyApp() }
-    }
-
-    override fun getAdapter(): BaseAdapter<OnDeviceApp> {
+    override fun getAdapter(): BaseAdapter<MetaApp> {
         return AdapterOnDeviceApp(activity)
     }
 }

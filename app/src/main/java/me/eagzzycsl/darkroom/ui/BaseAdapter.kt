@@ -6,15 +6,13 @@ import android.view.View
 
 import java.util.ArrayList
 
-import me.eagzzycsl.darkroom.model.MyApp
-
-abstract class BaseAdapter<M : MyApp>(var context: Context)
-    : RecyclerView.Adapter<BaseAdapter<M>.RecViewHolder<M>>() {
-    private var dataArray: ArrayList<M> = ArrayList()
+abstract class BaseAdapter<MetaApp>(var context: Context)
+    : RecyclerView.Adapter<BaseAdapter<MetaApp>.RecViewHolder<MetaApp>>() {
+    private var dataArray: ArrayList<MetaApp> = ArrayList()
 
     abstract val layoutId: Int
 
-    override fun onBindViewHolder(holder: RecViewHolder<M>, position: Int) {
+    override fun onBindViewHolder(holder: RecViewHolder<MetaApp>, position: Int) {
         holder.setContent(dataArray[position])
     }
 
@@ -22,13 +20,13 @@ abstract class BaseAdapter<M : MyApp>(var context: Context)
         return dataArray.size
     }
 
-    fun setDataArray(dataArray: ArrayList<M>) {
+    fun setDataArray(dataArray: ArrayList<MetaApp>) {
         this.dataArray = dataArray
     }
 
-    abstract inner class RecViewHolder<in E : MyApp>(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    abstract inner class RecViewHolder<in MetaApp>(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        abstract fun setContent(data: E)
+        abstract fun setContent(data: MetaApp)
     }
 
 }

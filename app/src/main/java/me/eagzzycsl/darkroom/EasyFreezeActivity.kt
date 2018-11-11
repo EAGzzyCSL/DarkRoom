@@ -16,7 +16,8 @@ class EasyFreezeActivity : ActivityToolbar(), View.OnClickListener {
             R.id.fab_confirm -> {
                 val naughtyApps = easyFreezeFragment?.genSelectedApps()
                 if (naughtyApps != null) {
-                    AppList.appendNaughtyApps(this, naughtyApps)
+                    // TODO: 处理easyFreeze
+//                    AppList.appendNaughtyApps(this, naughtyApps)
                 }
                 finish()
             }

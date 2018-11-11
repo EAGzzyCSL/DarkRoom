@@ -7,11 +7,11 @@ import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.widget.Toast
 import me.eagzzycsl.darkroom.JumpActivity
-import me.eagzzycsl.darkroom.model.NaughtyApp
+import me.eagzzycsl.darkroom.model.MetaApp
 import me.eagzzycsl.darkroom.utils.ConstantString
 
 object ShortCutManager {
-    fun createShortcut(context: Context, naughtyApp: NaughtyApp) {
+    fun createShortcut(context: Context, naughtyApp: MetaApp) {
         val addShortcutIntent = Intent(ConstantString.ACTION_ADD_SHORTCUT)
         addShortcutIntent.putExtra("duplicate", true)
         addShortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, naughtyApp.appName)

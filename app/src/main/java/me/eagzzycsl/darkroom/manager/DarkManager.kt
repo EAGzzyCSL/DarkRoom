@@ -6,7 +6,7 @@ import android.widget.Toast
 import me.eagzzycsl.darkroom.R
 import me.eagzzycsl.darkroom.action.FreezeAction
 import me.eagzzycsl.darkroom.action.ReleaseAction
-import me.eagzzycsl.darkroom.model.NaughtyApp
+import me.eagzzycsl.darkroom.model.MetaApp
 import me.eagzzycsl.darkroom.task.ActionQueue
 import me.eagzzycsl.darkroom.task.DarkTask
 
@@ -28,26 +28,26 @@ object DarkManager {
         this.working = true;
     }
 
-    fun release(naughtyApp: NaughtyApp, context: Context) {
+    fun release(naughtyApp: MetaApp, context: Context) {
         this.init(WorkMode.ReleaseAndLaunchOne)
         ActionQueue.append(ReleaseAction(naughtyApp))
         DarkTask().execute(context)
     }
 
-    fun freeze(naughtyApp: NaughtyApp, context: Context) {
+    fun freeze(naughtyApp: MetaApp, context: Context) {
         this.init(WorkMode.FreezeOne)
         ActionQueue.append(FreezeAction(naughtyApp))
         DarkTask().execute(context)
     }
 
-    fun freezeAll(naughtyApps: List<NaughtyApp>, context: Context) {
+    fun freezeAll(naughtyApps: List<MetaApp>, context: Context) {
 
         this.init(WorkMode.FreezeAll)
         ActionQueue.appendAll(naughtyApps.map { FreezeAction(it) })
         DarkTask().execute(context)
     }
 
-    fun releaseAll(naughtyApps: Array<out NaughtyApp>, context: Context) {
+    fun releaseAll(naughtyApps: Array<MetaApp>, context: Context) {
         this.init(WorkMode.ReleaseAll)
         ActionQueue.appendAll(naughtyApps.map { ReleaseAction(it) })
         DarkTask().execute(context)

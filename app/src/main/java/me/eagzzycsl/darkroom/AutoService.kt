@@ -31,13 +31,16 @@ class AutoService : AccessibilityService() {
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
+        println("onAccessEvent")
         if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            println("isWindowEvent")
             val activityName = getActivityName(event)
             if (rootInActiveWindow == null) {
-
+                println("rootIsNull")
             } else {
-
+                println("rootNotNull")
                 if (DarkManager.inWorking) {
+                    println("inWorking");
                     ActionQueue.accept(activityName)
                     ActionQueue.react(rootInActiveWindow)
                 } else {

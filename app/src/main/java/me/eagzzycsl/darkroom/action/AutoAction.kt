@@ -2,11 +2,11 @@ package me.eagzzycsl.darkroom.action
 
 import android.content.Context
 import android.view.accessibility.AccessibilityNodeInfo
+import me.eagzzycsl.darkroom.model.MetaApp
 import me.eagzzycsl.darkroom.state.MachineState
-import me.eagzzycsl.darkroom.model.MyApp
 import me.eagzzycsl.darkroom.utils.ConstantString
 
-abstract class AutoAction(val app: MyApp) {
+abstract class AutoAction(val app: MetaApp) {
     enum class ActionStatus {
         Pending,
         Running,

@@ -5,10 +5,10 @@ import android.os.Bundle
 import java.util.ArrayList
 
 import me.eagzzycsl.darkroom.manager.AppList
-import me.eagzzycsl.darkroom.model.NaughtyApp
+import me.eagzzycsl.darkroom.model.MetaApp
 
-class FragmentNaughty : BaseFragment<NaughtyApp>() {
-    val data: ArrayList<NaughtyApp> = AppList.naughtyApps
+class FragmentNaughty : BaseFragment<MetaApp>() {
+    val data: ArrayList<MetaApp> = AppList.naughtyApps
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class FragmentNaughty : BaseFragment<NaughtyApp>() {
         updateData()
     }
 
-    override fun getAdapter(): BaseAdapter<NaughtyApp> {
+    override fun getAdapter(): BaseAdapter<MetaApp> {
         return AdapterNaughty(activity)
     }
 

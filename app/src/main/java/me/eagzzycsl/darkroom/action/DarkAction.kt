@@ -3,11 +3,11 @@ package me.eagzzycsl.darkroom.action
 import android.content.Context
 import me.eagzzycsl.darkroom.state.MachineState
 import me.eagzzycsl.darkroom.state.WindowChange
-import me.eagzzycsl.darkroom.model.MyApp
 import me.eagzzycsl.darkroom.manager.AppManager
+import me.eagzzycsl.darkroom.model.MetaApp
 import me.eagzzycsl.darkroom.utils.ConstantString
 
-abstract class DarkAction(app: MyApp) : AutoAction(app) {
+abstract class DarkAction(app: MetaApp) : AutoAction(app) {
     private val maybeNoneState = MachineState(ConstantString.StateName.mayBeNone)
     val firstShowAppDetailState = MachineState(ConstantString.StateName.firstShowAppDetail)
     val confirmDisableState = MachineState(ConstantString.StateName.confirmDisable)

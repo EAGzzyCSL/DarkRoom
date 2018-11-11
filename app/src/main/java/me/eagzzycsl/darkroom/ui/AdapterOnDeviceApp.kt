@@ -8,9 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import me.eagzzycsl.darkroom.R
-import me.eagzzycsl.darkroom.model.OnDeviceApp
+import me.eagzzycsl.darkroom.model.MetaApp
 
-internal class AdapterOnDeviceApp(context: Context) : BaseAdapter<OnDeviceApp>(context) {
+internal class AdapterOnDeviceApp(context: Context) : BaseAdapter<MetaApp>(context) {
 
     override val layoutId: Int
         get() = R.layout.layout_item_on_device
@@ -19,7 +19,7 @@ internal class AdapterOnDeviceApp(context: Context) : BaseAdapter<OnDeviceApp>(c
         return OnDeviceHolder(LayoutInflater.from(context).inflate(layoutId, parent, false))
     }
 
-    inner class OnDeviceHolder internal constructor(itemView: View) : BaseAdapter<OnDeviceApp>.RecViewHolder<OnDeviceApp>(itemView), View.OnClickListener {
+    inner class OnDeviceHolder internal constructor(itemView: View) : BaseAdapter<MetaApp>.RecViewHolder<MetaApp>(itemView), View.OnClickListener {
         private val itemName: TextView = itemView.findViewById(R.id.item_name)
         private val itemIcon: ImageView = itemView.findViewById(R.id.item_icon)
 
@@ -28,10 +28,10 @@ internal class AdapterOnDeviceApp(context: Context) : BaseAdapter<OnDeviceApp>(c
             itemView.setOnClickListener(this)
         }
 
-        override fun setContent(data: OnDeviceApp) {
+        override fun setContent(data: MetaApp) {
             itemName.text = data.appName
             itemIcon.setImageDrawable(data.appIcon)
-            if (data.frozen) {
+            if (data.willFreeze) {
                 itemName.setTextColor(context.getColor(R.color.colorPrimary))
             } else {
                 itemName.setTextColor(context.getColor(android.R.color.black))
@@ -40,8 +40,8 @@ internal class AdapterOnDeviceApp(context: Context) : BaseAdapter<OnDeviceApp>(c
         }
 
         override fun onClick(view: View) {
-            val onDeviceApp = view.tag as OnDeviceApp
-            onDeviceApp.toggleFrozen()
+            val onDeviceApp = view.tag as MetaApp
+            onDeviceApp.toggleWillFreeze()
             this@AdapterOnDeviceApp.notifyItemChanged(this.layoutPosition)
         }
     }

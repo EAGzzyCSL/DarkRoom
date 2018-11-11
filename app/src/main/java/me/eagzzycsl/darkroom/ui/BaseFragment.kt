@@ -11,12 +11,11 @@ import android.view.ViewGroup
 
 import java.util.ArrayList
 
-import me.eagzzycsl.darkroom.model.MyApp
 import me.eagzzycsl.darkroom.R
 
-abstract class BaseFragment<M : MyApp> : Fragment() {
+abstract class BaseFragment<MetaApp> : Fragment() {
     private var recyclerView: RecyclerView? = null
-    private var adapter: BaseAdapter<M>? = null
+    private var adapter: BaseAdapter<MetaApp>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +35,9 @@ abstract class BaseFragment<M : MyApp> : Fragment() {
         return view
     }
 
-    abstract fun getAdapter(): BaseAdapter<M>
+    abstract fun getAdapter(): BaseAdapter<MetaApp>
 
-    fun setData(dataArray: ArrayList<M>) {
+    fun setData(dataArray: ArrayList<MetaApp>) {
         adapter?.setDataArray(dataArray)
         adapter?.notifyDataSetChanged()
     }

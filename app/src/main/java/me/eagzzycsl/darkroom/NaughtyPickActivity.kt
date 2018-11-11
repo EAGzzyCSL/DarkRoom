@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager
 import android.view.View
 
 import me.eagzzycsl.darkroom.manager.AppList
-import me.eagzzycsl.darkroom.model.NaughtyApp
+import me.eagzzycsl.darkroom.model.MetaApp
 import me.eagzzycsl.darkroom.ui.ActivityToolbar
 import me.eagzzycsl.darkroom.ui.FragmentOnDeviceApp
 import me.eagzzycsl.darkroom.ui.FragmentSysApp
@@ -41,10 +41,9 @@ class NaughtyPickActivity : ActivityToolbar(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.fab -> {
-                val naughtyApps = LinkedList<NaughtyApp>()
-                naughtyApps.addAll(fragmentUserApp.genSelectedApps())
-                naughtyApps.addAll(fragmentSysApp.genSelectedApps())
-                AppList.saveNaughtyApps(this, naughtyApps)
+                AppList.markNaughty()
+                AppList.saveNaughtyApps(this)
+                AppList.unMarkFrozen()
                 finish()
             }
         }

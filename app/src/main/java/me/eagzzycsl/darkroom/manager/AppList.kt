@@ -3,79 +3,103 @@ package me.eagzzycsl.darkroom.manager
 import android.content.Context
 import android.content.pm.ApplicationInfo
 
-import java.util.ArrayList
-import java.util.HashMap
-
 import me.eagzzycsl.darkroom.db.SQLMan
 import me.eagzzycsl.darkroom.model.MetaApp
-import me.eagzzycsl.darkroom.model.NaughtyApp
-import me.eagzzycsl.darkroom.model.OnDeviceApp
+import java.text.Collator
+import java.util.*
 
 
 object AppList {
     private val metaApps = HashMap<String, MetaApp>()
-    val naughtyApps = ArrayList<NaughtyApp>()
-    val sysApps = ArrayList<OnDeviceApp>()
-    val userApps = ArrayList<OnDeviceApp>()
-    val easyFreezeApps = ArrayList<OnDeviceApp>()
-
-    fun genEasyFreezeApps(appName: String) {
-        easyFreezeApps.clear()
-        easyFreezeApps.addAll(
-                metaApps.filter { it.value.appName == appName }.map { OnDeviceApp(it.value) }
-        )
-    }
-
+    val naughtyApps = ArrayList<MetaApp>()
+    val sysApps = ArrayList<MetaApp>()
+    val userApps = ArrayList<MetaApp>()
+    val easyFreezeApps = ArrayList<MetaApp>()
+    private val appNameCollator = Collator.getInstance(Locale.CHINA)
     fun init(context: Context) {
-        initOnDeviceApp(context)
-        naughtyApps.clear()
-        naughtyApps.addAll(SQLMan.readAll(context))
-    }
-
-    private fun initOnDeviceApp(context: Context) {
-        userApps.clear()
-        sysApps.clear()
+        // 读取数据库中app的是否冻结记录
+        val appConfigRecords  = SQLMan.getAllAppConfig(context)
+        // 获取手机上安装的全部app
+        // 如果数据库中标记某个app为冻结，那么标记该app为冻结app
         val pm = context.packageManager
         val apps = pm.getInstalledApplications(0)
         apps.filter { it.flags and ApplicationInfo.FLAG_SYSTEM != 1 }.forEach({
             val metaApp = MetaApp(
                     it.loadLabel(pm).toString(),
                     it.packageName,
-                    it.loadIcon(pm)
+                    it.loadIcon(pm),
+                    appConfigRecords[it.packageName]?.isNaughty?: false,
+                    false
             )
             metaApps[it.packageName] = metaApp
         })
+        apps.filter { it.flags and ApplicationInfo.FLAG_SYSTEM == 1 }.forEach({
+            val metaApp = MetaApp(
+                    it.loadLabel(pm).toString(),
+                    it.packageName,
+                    it.loadIcon(pm),
+                    appConfigRecords[it.packageName]?.isNaughty?: false,
+                    true
+            )
+            metaApps[it.packageName] = metaApp
+        })
+        this.calc()
+        // 将新的数据写回数据库
+        SQLMan.writeAllMetaApps(context, metaApps.values.toList())
     }
-
-    fun addNaughtyAppFromDataBase(pkgName: String) {
-        // 如果未安装就不展示(新安装的app)
-        val naughtyApp = createNaughtAppFromPkgName(pkgName)
-        if (naughtyApp != null) {
-            naughtyApps.add(naughtyApp)
-        }
+    private fun calc() {
+        this.calcNaughtyApps()
+        this.calcUserApps()
+        this.calcSysApps()
     }
-
-    fun createNaughtAppFromPkgName(pkgName: String): NaughtyApp? {
-        val metaApp = metaApps[pkgName]
-        return if (metaApp == null) null else NaughtyApp(metaApp)
-    }
-
-    fun saveNaughtyApps(context: Context, naughtyAppToAdd: List<NaughtyApp>) {
-        SQLMan.remove(context)
+    private fun calcNaughtyApps() {
         this.naughtyApps.clear()
-        AppList.naughtyApps.addAll(naughtyAppToAdd)
-        SQLMan.insertNaughtyApps(context, this.naughtyApps)
+        this.naughtyApps.addAll(
+                metaApps.filterValues { it.isNaughty  }.values.toList()
+        )
+        this.naughtyApps.sortWith(
+                kotlin.Comparator { o1, o2 -> appNameCollator.compare(o1.appName, o2.appName) }
+        )
+    }
+    private fun calcUserApps() {
+        this.userApps.clear()
+        this.userApps.addAll(
+                metaApps.values.filter { !it.isSysApp }
+        )
+        this.userApps.sortWith(
+                kotlin.Comparator { o1, o2 -> appNameCollator.compare(o1.appName, o2.appName) }
+        )
+    }
+    private fun calcSysApps() {
+        this.sysApps.clear()
+        this.sysApps.addAll(
+                metaApps.values.filter { it.isSysApp }
+        )
+        this.sysApps.sortWith(
+                kotlin.Comparator { o1, o2 -> appNameCollator.compare(o1.appName, o2.appName) }
+        )
+    }
+    fun genEasyFreezeApps(appName: String) {
+        easyFreezeApps.clear()
+        easyFreezeApps.addAll(
+                metaApps.values.filter { it.appName == appName }
+        )
     }
 
-    fun appendNaughtyApps(context: Context, naughtyAppToAdd: List<NaughtyApp>) {
-        AppList.naughtyApps.clear()
-        AppList.naughtyApps.addAll(naughtyAppToAdd)
-        SQLMan.insertNaughtyApps(context, this.naughtyApps)
+    fun saveNaughtyApps(context: Context) {
+        SQLMan.markNaughtyApps(context,
+                metaApps.values.filter { it.willFreeze }
+        )
+        this.calcNaughtyApps()
     }
-
-    fun isNaughtyApp(onDeviceApp: OnDeviceApp): Boolean {
-        return naughtyApps.any { it -> it.metaApp == onDeviceApp.metaApp }
+    fun markFrozen() {
+        this.metaApps.values.forEach { it -> it.willFreeze = it.isNaughty }
     }
-
-
+    // TODO:这样子会导致已经冻结的app还没有被释放
+    fun markNaughty() {
+        this.metaApps.values.forEach { it-> it.isNaughty = it.willFreeze}
+    }
+    fun unMarkFrozen() {
+        this.metaApps.values.forEach{ it -> it.willFreeze = false }
+    }
 }
